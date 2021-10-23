@@ -1,5 +1,5 @@
 # Data structure for Dietdash
-### Recipe
+### Recipe JSON from Edamam API
 {
   "recipe": {
     "uri": "string",
@@ -59,4 +59,5 @@
   }
 }
 
+### Entity Relationship Diagram
 ![Entity Relationship Diagram](https://github.com/surajjayraman/recipe-app/blob/main/planning/img/recipe-app-Page-1.drawio.png?raw=true)
