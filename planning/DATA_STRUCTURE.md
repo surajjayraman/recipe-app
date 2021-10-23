@@ -62,19 +62,19 @@
 ### Entity Relationship Diagram
 ![Entity Relationship Diagram](https://github.com/surajjayraman/recipe-app/blob/main/planning/img/recipe-app-Page-1.drawio.png?raw=true)
 
-### Tables
+# Tables
 
-## Recipes
+### Recipes
 This table holds all of the recipes.
 
-## RecipeIngredients
+### RecipeIngredients
 This table connects the recipes table and the ingredients table. Recipes can include many ingredients and ingredients can be associated with multiple recipes.
 
-## RecipesList
+### RecipeLists
 This bridge table connects recipes table and the users table. It holds recipes that each user wants to make.
 
-## Ingredients
+### Ingredients
 All the ingredients are stored in this table. Ingredients are food or drink items. 
 
-## Users
+### Users
 This table holds all of the users signed up for DietDash Web app.
