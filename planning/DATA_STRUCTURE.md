@@ -58,3 +58,5 @@
     ]
   }
 }
+
+![Entity Relationship Diagram](https://github.com/surajjayraman/recipe-app/blob/main/planning/img/recipe-app-Page-1.drawio.png?raw=true)
