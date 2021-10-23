@@ -1,4 +1,4 @@
-# Data structure for Dietdash
+# Mockups for Dietdash
 
 !["Home"](https://github.com/surajjayraman/recipe-app/blob/main/planning/img/Home-Page.png)
 
