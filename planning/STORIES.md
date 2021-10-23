@@ -5,6 +5,7 @@ An User should
 (Before)
 
 be able to browse through all the recipes
+be able to search for recipes
 be able to see ingridients needed for a recipe
 be able to sign up or login for personalized meal planning
 
