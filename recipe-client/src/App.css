@@ -1,3 +1,7 @@
 .app-container {
   margin-left: 1em;
 }
+.side-bar-col {
+  width: 20em;
+  max-width: 20em;
+}
