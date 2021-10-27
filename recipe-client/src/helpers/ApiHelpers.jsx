@@ -1,10 +1,12 @@
 import useFetch from "./UseFetch";
 
-const recipe_app_key = process.env.RECIPE_APP_KEY;
-const app_id = e56e3fea;
+// const recipe_app_key = process.env.REACT_APP_RECIPE_KEY;
+// console.log(recipe_app_key);
+const recipe_app_key = "9250dede3c2afdb663839121df608485";
+const recipe_app_id = "e56e3fea";
 
 // API for fetching recipe
-export const useFetchCurrentWeather = (city = cityName) =>
+export const useFetchRecipe = () =>
   useFetch(
-    `https://api.edamam.com/search?q=chicken&app_id=${app_id}&app_key=${recipe_app_key}`
+    `https://api.edamam.com/search?q=chicken&app_id=${recipe_app_id}&app_key=${recipe_app_key}`
   );
