@@ -1,0 +1,24 @@
+.logo {
+  width: 15em;
+  height: auto;
+}
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  width: 10em;
+}
+.sidebar-image-hr-col {
+  align-content: center;
+}
+.sidebar-container {
+  width: 20em;
+  margin-left: 1em;
+}
+.nav-link {
+  color: #000000;
+}
+.nav-link:hover {
+  color: orange;
+}
