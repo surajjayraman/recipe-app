@@ -28,6 +28,7 @@ protein INT NOT NULL
 );
 
 CREATE TABLE ingredients (
+user_id INT NOT NULL,
 ingredient_id SERIAL PRIMARY KEY NOT NULL,
 ingridient_name VARCHAR(50) NOT NULL
 );
