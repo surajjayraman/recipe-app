@@ -1,0 +1,34 @@
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS recipe CASCADE;
+DROP TABLE IF EXISTS ingredients CASCADE;
+
+CREATE TABLE users (
+id SERIAL PRIMARY KEY NOT NULL,
+name VARCHAR(50) NOT NULL,
+email VARCHAR(50) NOT NULL,
+password VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE recipe (
+recipe_id SERIAL PRIMARY KEY NOT NULL,
+user_id INT NOT NULL,
+recipe_name VARCHAR(255) NOT NULL,
+image_url VARCHAR(255) NOT NULL,
+prep_time INT NOT NULL,
+serving_size INT NOT NULL,
+cuisine_type VARCHAR(255) NOT NULL,
+source VARCHAR(255) NOT NULL,
+preparation VARCHAR(255) NOT NULL,
+ingredients TEXT NOT NULL,
+meal_type VARCHAR(255) NOT NULL,
+calories INT NOT NULL,
+fat INT NOT NULL,
+carbs INT NOT NULL,
+protein INT NOT NULL
+);
+
+CREATE TABLE ingredients (
+user_id INT NOT NULL,
+ingredient_id SERIAL PRIMARY KEY NOT NULL,
+ingridient_name VARCHAR(50) NOT NULL
+);
