@@ -12,14 +12,19 @@ password VARCHAR(50) NOT NULL
 CREATE TABLE recipe (
 recipe_id SERIAL PRIMARY KEY NOT NULL,
 user_id INT NOT NULL,
-image_url VARCHAR(50) NOT NULL,
-prep_time VARCHAR(50) NOT NULL,
-serving_size VARCHAR(50) NOT NULL,
-category VARCHAR(50) NOT NULL,
-preparation VARCHAR(50) NOT NULL,
-fat VARCHAR(50) NOT NULL,
-carbs VARCHAR(50) NOT NULL,
-protein VARCHAR(50) NOT NULL
+recipe_name VARCHAR(255) NOT NULL,
+image_url VARCHAR(255) NOT NULL,
+prep_time INT NOT NULL,
+serving_size INT NOT NULL,
+cuisine_type VARCHAR(255) NOT NULL,
+source VARCHAR(255) NOT NULL,
+preparation VARCHAR(255) NOT NULL,
+ingredients TEXT NOT NULL,
+meal_type VARCHAR(255) NOT NULL,
+calories INT NOT NULL,
+fat INT NOT NULL,
+carbs INT NOT NULL,
+protein INT NOT NULL
 );
 
 CREATE TABLE ingredients (
