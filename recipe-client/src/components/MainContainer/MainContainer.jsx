@@ -18,9 +18,9 @@ function MainContainer() {
   return (
     <Container className="sidebar-container">
       <Row>
+        <MealPlanner />
         <Search className="search-component" placeholder="Search Recipes" />
         {/* <DisplayCard /> */}
-        <MealPlanner />
       </Row>
     </Container>
   );
