@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const port = 8080;
 
@@ -9,17 +10,14 @@ app.get("/", (req, res) => {
 const recipeRouter = require("./routes/recipeRouter.js");
 
 app.use(express.json());
-app.use(function (req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
-  res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Content-Type, Access-Control-Allow-Headers"
-  );
-  next();
-});
+app.use(
+  cors({
+    origin: "http://localhost:8080",
+    methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
+  })
+);
 
-app.get("/recipe", (req, res) => {
+app.get("/recipe", cors(), (req, res) => {
   recipeRouter
     .getRecipes()
     .then((response) => {
@@ -30,7 +28,7 @@ app.get("/recipe", (req, res) => {
     });
 });
 
-app.post("/recipe", (req, res) => {
+app.post("/recipe", cors(), (req, res) => {
   recipeRouter
     .addRecipes(req.body)
     .then((response) => {
@@ -41,7 +39,7 @@ app.post("/recipe", (req, res) => {
     });
 });
 
-app.delete("/recipe/:id", (req, res) => {
+app.delete("/recipe/:id", cors(), (req, res) => {
   recipeRouter
     .deleteRecipe(req.params.id)
     .then((response) => {
