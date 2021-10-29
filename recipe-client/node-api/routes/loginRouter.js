@@ -11,7 +11,7 @@ pool.connect(console.log("connected to dietdash db"));
 
 const getUser = () => {
   return new Promise(function (resolve, reject) {
-    pool.query("SELECT * FROM users ORDER BY user_id ASC", (error, results) => {
+    pool.query("SELECT * FROM users ORDER BY id ASC", (error, results) => {
       if (error) {
         reject(error);
       }

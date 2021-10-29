@@ -12,7 +12,7 @@ pool.connect(console.log("connected to dietdash db"));
 const getIngredients = () => {
   return new Promise(function (resolve, reject) {
     pool.query(
-      "SELECT * FROM ingridients ORDER BY ingredient_id ASC",
+      "SELECT * FROM ingredients ORDER BY ingredient_id ASC",
       (error, results) => {
         if (error) {
           reject(error);

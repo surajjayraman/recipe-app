@@ -9,6 +9,7 @@ app.get("/", (req, res) => {
 
 const recipeRouter = require("./routes/recipeRouter.js");
 const ingredientsRouter = require("./routes/ingredientsRouter.js");
+const loginRouter = require("./routes/loginRouter.js");
 
 app.use(express.json());
 app.use(
@@ -17,6 +18,28 @@ app.use(
     methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
   })
 );
+
+app.get("/login", cors(), (req, res) => {
+  loginRouter
+    .getUser()
+    .then((response) => {
+      res.status(200).send(response);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
+});
+
+app.post("/login", cors(), (req, res) => {
+  loginRouter
+    .addUser(req.body)
+    .then((response) => {
+      res.status(200).send(response);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
+});
 
 app.get("/recipe", cors(), (req, res) => {
   recipeRouter
