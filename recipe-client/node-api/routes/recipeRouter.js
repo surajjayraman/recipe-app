@@ -74,7 +74,7 @@ const deleteRecipe = () => {
       if (error) {
         reject(error);
       }
-      resolve(`Merchant deleted with ID: ${id}`);
+      resolve(`Recipe deleted with ID: ${id}`);
     });
   });
 };

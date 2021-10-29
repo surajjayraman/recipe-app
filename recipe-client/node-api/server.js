@@ -8,6 +8,7 @@ app.get("/", (req, res) => {
 });
 
 const recipeRouter = require("./routes/recipeRouter.js");
+const ingredientsRouter = require("./routes/ingredientsRouter.js");
 
 app.use(express.json());
 app.use(
@@ -42,6 +43,39 @@ app.post("/recipe", cors(), (req, res) => {
 app.delete("/recipe/:id", cors(), (req, res) => {
   recipeRouter
     .deleteRecipe(req.params.id)
+    .then((response) => {
+      res.status(200).send(response);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
+});
+
+app.get("/ingredients", cors(), (req, res) => {
+  ingredientsRouter
+    .getIngredients()
+    .then((response) => {
+      res.status(200).send(response);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
+});
+
+app.post("/ingredients", cors(), (req, res) => {
+  ingredientsRouter
+    .addIngredients(req.body)
+    .then((response) => {
+      res.status(200).send(response);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
+});
+
+app.delete("/ingredients/:id", cors(), (req, res) => {
+  ingredientsRouter
+    .deleteIngredients(req.params.id)
     .then((response) => {
       res.status(200).send(response);
     })

@@ -29,38 +29,19 @@ function MealPlanner() {
   //     });
   // }
 
-  // function createRecipe() {
-  //   let name = prompt("Enter name");
-  //   let email = prompt("Enter name");
-  //   fetch("http://localhost:8080/recipe", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({ name, email }),
-  //   })
-  //     .then((response) => {
-  //       return response.text();
-  //     })
-  //     .then((data) => {
-  //       alert(data);
-  //       getRecipes();
-  //     });
-  // }
-
-  // function deleteRecipe() {
-  //   let id = prompt("Enter recipe id");
-  //   fetch(`http://localhost:8080/recipe/${id}`, {
-  //     method: "DELETE",
-  //   })
-  //     .then((response) => {
-  //       return response.text();
-  //     })
-  //     .then((data) => {
-  //       alert(data);
-  //       getRecipes();
-  //     });
-  // }
+  function deleteRecipe() {
+    let id = prompt("Enter recipe id");
+    fetch(`http://localhost:8080/recipe/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        return response.text();
+      })
+      .then((data) => {
+        alert(data);
+        // useFetchMyRecipe();
+      });
+  }
 
   return (
     <div>
@@ -94,8 +75,6 @@ function MealPlanner() {
             </Card.Body>
           </Card>
         ))}
-        <button>Add Recipe</button>
-        <br />
         <button>Delete Recipe</button>
       </div>
     </div>
