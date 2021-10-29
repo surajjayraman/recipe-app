@@ -10,3 +10,5 @@ export const useFetchRecipe = () =>
   useFetch(
     `https://api.edamam.com/search?q=chicken&app_id=${recipe_app_id}&app_key=${recipe_app_key}`
   );
+
+export const useFetchMyRecipe = () => useFetch(`http://localhost:8080/recipe`);
