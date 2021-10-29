@@ -16,7 +16,9 @@ function App() {
           <MainContainer />
         </Col>
       </Row>
+      
     </Container>
+    
   );
 }
 
