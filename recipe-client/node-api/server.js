@@ -29,10 +29,9 @@ app.get("/login", cors(), (req, res) => {
       res.status(500).send(error);
     });
 });
-
 app.post("/login", cors(), (req, res) => {
   loginRouter
-    .addUser(req.body)
+    .getUser()
     .then((response) => {
       res.status(200).send(response);
     })
@@ -40,6 +39,17 @@ app.post("/login", cors(), (req, res) => {
       res.status(500).send(error);
     });
 });
+
+// app.post("/register", cors(), (req, res) => {
+//   loginRouter
+//     .addUser(req.body)
+//     .then((response) => {
+//       res.status(200).send(response);
+//     })
+//     .catch((error) => {
+//       res.status(500).send(error);
+//     });
+// });
 
 app.get("/recipe", cors(), (req, res) => {
   recipeRouter

@@ -10,35 +10,35 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function Sidebar() {
   return (
-    <Container className="sidebar-container">
-      <Row>
-        <Col className="sidebar-image-hr-col">
-          <img src={logo} className="logo" />
-          <hr className="hr" />
-        </Col>
-      </Row>
-      <Router>
-        <Nav defaultActiveKey="/home" className="flex-column">
-          <Nav.Link>
-            <Link to="/">Home</Link>
-          </Nav.Link>
-          <Nav.Link eventKey="link-1">
-            <Link to="/mealPlanner">Meal Planner</Link>
-          </Nav.Link>
-          <Nav.Link eventKey="link-1">
-            <Link to="/myRecipes">My Recipes</Link>
-          </Nav.Link>
-          <Nav.Link eventKey="link-2">Ingridients List</Nav.Link>
-          <Nav.Link eventKey="link-2">Browse</Nav.Link>
-        </Nav>
-        <Switch>
-          <Route exact path="/" component={MainContainer} />
-          <Route path="/mealPlanner" component={MealPlanner} />
-          <Route path="/myRecipes" component={MyRecipes} />
-          <Route path="/mealPlanner" component={MealPlanner} />
-        </Switch>
-      </Router>
-    </Container>
+    <div></div>
+    // <Router>
+    // <Container className="sidebar-container">
+    //   <Row>
+    //     <Col className="sidebar-image-hr-col">
+    //       <img src={logo} className="logo" />
+    //       <hr className="hr" />
+    //     </Col>
+    //   </Row>
+
+    //   <Nav defaultActiveKey="/home" className="flex-column">
+    //     <Nav.Link>{/* <Link to="/">Home</Link> */}</Nav.Link>
+    //     <Nav.Link eventKey="link-1">
+    //       <Link to="/mealPlanner">Meal Planner</Link>
+    //     </Nav.Link>
+    //     <Nav.Link eventKey="link-1">
+    //       <Link to="/myRecipes">My Recipes</Link>
+    //     </Nav.Link>
+    //     <Nav.Link eventKey="link-2">Ingridients List</Nav.Link>
+    //     <Nav.Link eventKey="link-2">Browse</Nav.Link>
+    //   </Nav>
+    //   {/* <Switch> */}
+    //   {/* <Route exact path="/" component={MainContainer} /> */}
+    //   {/* <Route path="/mealPlanner" component={MealPlanner} />
+    //       <Route path="/myRecipes" component={MyRecipes} />
+    //       <Route path="/mealPlanner" component={MealPlanner} /> */}
+    //   {/* </Switch> */}
+    // </Container>
+    // // </Router>
   );
 }
 export default Sidebar;

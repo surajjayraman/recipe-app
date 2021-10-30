@@ -1,22 +1,21 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React, { useState } from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
-import { Container, Row, Col } from "react-bootstrap";
-import Sidebar from "./components/sidebar/Sidebar";
-import MainContainer from "./components/MainContainer/MainContainer";
-import MealPlanner from "./components/MealPlanner/MealPlanner";
-import MyRecipes from "./components/MyRecipes/MyRecipes";
-
 import Login from "./components/Login/Login";
+import MainContainer from "./components/MainContainer/MainContainer";
 
 function App() {
+  // const [token, setToken] = useState();
+  // if (!token) {
+  //   return <Login setToken={setToken} />;
+  // }
   return (
-    <Router>
+    <BrowserRouter>
       <div>
         <Switch>
-          <Route exact path="/" component={MainContainer}>
-            <Login />
-          </Route>
+          <Route exact path="/" component={Login} />
+          <Route path="/mainContainer" component={MainContainer} />
+          {/* <Login /> */}
         </Switch>
         {/* <Container className="app-container">
         <Row>
@@ -37,7 +36,7 @@ function App() {
         </Row>
       </Container> */}
       </div>
-    </Router>
+    </BrowserRouter>
   );
 }
 

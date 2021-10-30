@@ -7,7 +7,7 @@ import logo from "../../images/orange_dietdash_logo_2.png";
 function RightSide() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  let history = useHistory();
+  const history = useHistory();
   useEffect(() => {
     if (localStorage.getItem("user-info")) history.push("/mainContainer");
   }, []);
@@ -23,13 +23,12 @@ function RightSide() {
       body: JSON.stringify(item),
     });
     result = await result.json();
-    // console.log("Logged in");
     localStorage.setItem("user-info", JSON.stringify(result));
     history.push("/mainContainer");
   }
   return (
     <div>
-      <Form className="login-form">
+      <Form className="login-form" onSubmit={(e) => e.preventDefault()}>
         <img src={logo} className="logo" />
         <h2>Join, and Eat well</h2>
 
