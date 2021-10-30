@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 import "./search-box.css";
 
 export const Search = ({ placeholder, handleChange }) => (
-  <div>
+  <div className="search-container">
     <input
       type="search"
       className="search"

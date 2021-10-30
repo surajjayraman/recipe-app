@@ -2,13 +2,17 @@
   /* border: none; */
   /* outline: none; */
   padding: 10px;
-  width: 500px;
+  width: 25em;
   line-height: 12px;
   margin-bottom: 30px;
   margin-top: 30px;
+
   /* margin-right: 30px; */
 }
 .search-button {
   margin-left: 1.5em;
   width: 7em;
+}
+.search-container {
+  padding-left: 0px;
 }

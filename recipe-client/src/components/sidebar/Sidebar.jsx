@@ -14,8 +14,13 @@ function Sidebar() {
         </Col>
       </Row>
       <Nav defaultActiveKey="/home" className="flex-column">
-        <Nav.Link href="/home">Home</Nav.Link>
-        <Nav.Link eventKey="link-1">Meal Planner</Nav.Link>
+        <Nav.Link to="/">Home</Nav.Link>
+        <Nav.Link eventKey="link-1" to="/">
+          Meal Planner
+        </Nav.Link>
+        <Nav.Link eventKey="link-1" to="">
+          My Recipes
+        </Nav.Link>
         <Nav.Link eventKey="link-2">Ingridients List</Nav.Link>
         <Nav.Link eventKey="link-2">Browse</Nav.Link>
       </Nav>
