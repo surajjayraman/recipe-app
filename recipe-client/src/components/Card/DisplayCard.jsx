@@ -7,20 +7,20 @@ export const DisplayCard = (props) => {
   const data = props;
   const addRecipe = (state, props) => {
     console.log("Clicked");
-    // fetch("http://localhost:8080/recipe", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({}),
-    // })
-    //   .then((response) => {
-    //     return response.text();
-    //   })
-    //   .then((data) => {
-    //     alert(data);
-    //     // useFetchMyRecipe();
-    //   });
+    fetch("http://localhost:8080/recipe", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({}),
+    })
+      .then((response) => {
+        return response.text();
+      })
+      .then((data) => {
+        alert(data);
+        // useFetchMyRecipe();
+      });
   };
 
   return (
@@ -46,7 +46,7 @@ export const DisplayCard = (props) => {
             <Card.Link
               href={`${data[item].recipe.url}`}
             >{`${data[item].recipe.source}`}</Card.Link>
-            <button onClick={this.addRecipe.bind(this)}>Add Recipe</button>
+            {/* <button onClick={this.addRecipe.bind(this)}>Add Recipe</button> */}
           </Card.Body>
         </Card>
       ))}

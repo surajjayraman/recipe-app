@@ -1,9 +1,32 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import "./login.css";
 import logo from "../../images/orange_dietdash_logo_2.png";
 
 function RightSide() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const history = useHistory();
+  useEffect(() => {
+    if (localStorage.getItem("user-info")) history.push("/mainContainer");
+  }, []);
+  async function login() {
+    let item = { email, password };
+    let result = await fetch("http://localhost:8080/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+
+      body: JSON.stringify(item),
+    });
+    result = await result.json();
+    // console.log("Logged in");
+    localStorage.setItem("user-info", JSON.stringify(result));
+    history.pushState("/mainContainer");
+  }
   return (
     <div>
       <Form className="login-form">
@@ -16,6 +39,7 @@ function RightSide() {
             className="login_email"
             type="email"
             placeholder="Enter email"
+            onChange={(e) => setEmail(e.target.value)}
           />
         </Form.Group>
 
@@ -25,10 +49,11 @@ function RightSide() {
             className="login_email"
             type="password"
             placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
 
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" onClick={login}>
           Login
         </Button>
       </Form>
