@@ -30,9 +30,6 @@ class MainContainer extends Component {
   render() {
     const { recipes } = this.state;
     console.log(recipes);
-    // const filteredMonsters = monsters.filter((monster) =>
-    //   monster.name.toLowerCase().includes(searchField.toLowerCase())
-    // );
 
     // function clickMe() {
     //   alert("test");
