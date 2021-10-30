@@ -1,8 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Container, Row, Col, Nav } from "react-bootstrap";
-// import { ImHome3 } from "react-icons/aifill";
 import "./sideBar.css";
 import logo from "../../images/orange_dietdash_logo_2.png";
+import MainContainer from "../MainContainer/MainContainer";
+import MealPlanner from "../MealPlanner/MealPlanner";
+import MyRecipes from "../MyRecipes/MyRecipes";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function Sidebar() {
   return (
@@ -13,17 +17,27 @@ function Sidebar() {
           <hr className="hr" />
         </Col>
       </Row>
-      <Nav defaultActiveKey="/home" className="flex-column">
-        <Nav.Link to="/">Home</Nav.Link>
-        <Nav.Link eventKey="link-1" to="/">
-          Meal Planner
-        </Nav.Link>
-        <Nav.Link eventKey="link-1" to="">
-          My Recipes
-        </Nav.Link>
-        <Nav.Link eventKey="link-2">Ingridients List</Nav.Link>
-        <Nav.Link eventKey="link-2">Browse</Nav.Link>
-      </Nav>
+      <Router>
+        <Nav defaultActiveKey="/home" className="flex-column">
+          <Nav.Link>
+            <Link to="/">Home</Link>
+          </Nav.Link>
+          <Nav.Link eventKey="link-1">
+            <Link to="/mealPlanner">Meal Planner</Link>
+          </Nav.Link>
+          <Nav.Link eventKey="link-1">
+            <Link to="/myRecipes">My Recipes</Link>
+          </Nav.Link>
+          <Nav.Link eventKey="link-2">Ingridients List</Nav.Link>
+          <Nav.Link eventKey="link-2">Browse</Nav.Link>
+        </Nav>
+        <Switch>
+          <Route exact path="/" component={MainContainer} />
+          <Route path="/mealPlanner" component={MealPlanner} />
+          <Route path="/myRecipes" component={MyRecipes} />
+          <Route path="/mealPlanner" component={MealPlanner} />
+        </Switch>
+      </Router>
     </Container>
   );
 }

@@ -12,7 +12,7 @@ class MainContainer extends Component {
 
     this.state = {
       recipes: [],
-      // searchField: "",
+      searchField: "",
     };
   }
   componentDidMount() {
@@ -20,6 +20,7 @@ class MainContainer extends Component {
     // console.log(recipe_app_key);
     const recipe_app_key = "9250dede3c2afdb663839121df608485";
     const recipe_app_id = "e56e3fea";
+
     const api_url = `https://api.edamam.com/search?q=chicken&app_id=${recipe_app_id}&app_key=${recipe_app_key}`;
 
     fetch(api_url)
@@ -31,15 +32,16 @@ class MainContainer extends Component {
     const { recipes } = this.state;
     console.log(recipes);
 
-    // function clickMe() {
-    //   alert("test");
-    // }
-
     return (
       <Container className="sidebar-container">
         <Row>
-          {/* <MealPlanner /> */}
-          <Search className="search-component" placeholder="Search Recipes" />
+          <Search
+            className="search-component"
+            placeholder="Search Recipes"
+            handleChange={(e) => {
+              this.setState({ searchField: e.target.value });
+            }}
+          />
           <DisplayCard {...recipes} />
         </Row>
       </Container>

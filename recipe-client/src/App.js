@@ -5,23 +5,28 @@ import { Container, Row, Col } from "react-bootstrap";
 import Sidebar from "./components/sidebar/Sidebar";
 import MainContainer from "./components/MainContainer/MainContainer";
 import MealPlanner from "./components/MealPlanner/MealPlanner";
-import MyRecipes from "./components/";
+import MyRecipes from "./components/MyRecipes/MyRecipes";
 
-// import Login from "./components/Login/Login";
+import Login from "./components/Login/Login";
 
 function App() {
   return (
-    <div>
-      {/* <Login /> */}
-      <Container className="app-container">
+    <Router>
+      <div>
+        <Switch>
+          <Route exact path="/" component={MainContainer}>
+            <Login />
+          </Route>
+        </Switch>
+        {/* <Container className="app-container">
         <Row>
           <Col className="side-bar-col">
-            <Router>
+            
               <Sidebar />
               <Switch>
-                {/* <Route path="/" component={MainContainer} /> */}
+                <Route exact path="/" component={MainContainer} />
                 <Route path="/mealPlanner" component={MealPlanner} />
-                <Route path="/mealPlanner" component={MyRe} />
+                <Route path="/myRecipes" component={MyRecipes} />
                 <Route path="/mealPlanner" component={MealPlanner} />
               </Switch>
             </Router>
@@ -30,8 +35,9 @@ function App() {
             <MainContainer />
           </Col>
         </Row>
-      </Container>
-    </div>
+      </Container> */}
+      </div>
+    </Router>
   );
 }
 
