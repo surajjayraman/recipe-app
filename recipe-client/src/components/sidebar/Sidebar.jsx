@@ -14,7 +14,7 @@ function Sidebar() {
       <Container className="sidebar-container">
         <Row>
           <Col className="sidebar-image-hr-col">
-            <img src={logo} className="logo" />
+            {/* <img src={logo} className="logo" /> */}
             <hr className="hr" />
           </Col>
         </Row>
