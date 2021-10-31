@@ -6,11 +6,11 @@ import logo from "../../images/orange_dietdash_logo_2.png";
 import MainContainer from "../MainContainer/MainContainer";
 import MealPlanner from "../MealPlanner/MealPlanner";
 import MyRecipes from "../MyRecipes/MyRecipes";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 function Sidebar() {
   return (
-    <Router>
+    <BrowserRouter>
       <Container className="sidebar-container">
         <Row>
           <Col className="sidebar-image-hr-col">
@@ -31,13 +31,13 @@ function Sidebar() {
           <Nav.Link eventKey="link-2">Browse</Nav.Link>
         </Nav>
         <Switch>
-          {/* <Route exact path="/" component={MainContainer} /> */}
-          {/* <Route path="/mealPlanner" component={MealPlanner} />
+          <Route path="/main" component={MainContainer} />
+          <Route path="/mealPlanner" component={MealPlanner} />
           <Route path="/myRecipes" component={MyRecipes} />
-          <Route path="/mealPlanner" component={MealPlanner} /> */}
+          {/* <Route path="/ingredients" component={MealPlanner} /> */}
         </Switch>
       </Container>
-    </Router>
+    </BrowserRouter>
   );
 }
 export default Sidebar;
