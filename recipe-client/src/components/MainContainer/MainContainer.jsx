@@ -1,11 +1,11 @@
-import * as React from "react";
+import React, { setState } from "react";
 
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
+import AppBar from "@mui/material/AppBar";
 
-import Toolbar from "@mui/material/Toolbar";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
@@ -22,19 +22,32 @@ import MenuList from "@mui/material/MenuList";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Typography from "@mui/material/Typography";
+//Search
+import Paper from "@mui/material/Paper";
+import InputBase from "@mui/material/InputBase";
+import IconButton from "@mui/material/IconButton";
 
-// import "./sideBar.css";
-import logo from "../../images/orange_dietdash_logo_2.png";
+import ListSubheader from "@mui/material/ListSubheader";
+import InfoIcon from "@mui/icons-material/Info";
+
+import "./mainContainer.css";
+import logo from "../../images/dietDash-small.png";
+import { useFetchRecipe } from "../../helpers/ApiHelpers";
 
 const drawerWidth = 240;
 
-function Sidebar(props) {
+function MainContainer(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+  const { data, error, loading } = useFetchRecipe();
+
+  if (loading) return <p>Still Loading!</p>;
+  if (error) throw error;
+  console.log(data.hits);
 
   const drawer = (
     <div>
@@ -121,6 +134,28 @@ function Sidebar(props) {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
+      <AppBar
+        position="fixed"
+        sx={{
+          width: { sm: `calc(100% - ${drawerWidth}px)` },
+          ml: { sm: `${drawerWidth}px` },
+        }}
+      >
+        <Paper
+          component="form"
+          sx={{
+            p: "2px 4px",
+            display: "flex",
+            alignItems: "center",
+            width: 400,
+          }}
+        >
+          <InputBase sx={{ ml: 1, flex: 1 }} placeholder="Search for Recipes" />
+          <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
+            <SearchIcon />
+          </IconButton>
+        </Paper>
+      </AppBar>
       <Box
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
@@ -159,151 +194,36 @@ function Sidebar(props) {
           {drawer}
         </Drawer>
       </Box>
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          p: 3,
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-        }}
-      >
-        <Toolbar />
-        Recomendations
-        <ImageList sx={{ width: 1000, height: 600 }} cols={4}>
-          {itemData.map((item) => (
-            <ImageListItem key={item.img}>
-              <img
-                src={`${item.img}?w=248&fit=crop&auto=format`}
-                srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                alt={item.title}
-                loading="lazy"
-              />
-              <ImageListItemBar
-                title={item.title}
-                subtitle={<span>by: {item.author}</span>}
-                position="below"
-              />
-            </ImageListItem>
-          ))}
-        </ImageList>
-      </Box>
+
+      <ImageList sx={{ width: 1030, height: 1400, marginLeft: 8 }}>
+        <ImageListItem key="Subheader" cols={4}>
+          <ListSubheader component="div">For You</ListSubheader>
+        </ImageListItem>
+        {data.hits.map((item, index) => (
+          <ImageListItem key={`${index}`}>
+            <img
+              src={`${item.recipe.image}?w=248&fit=crop&auto=format`}
+              srcSet={`${item.recipe.image}?w=248&fit=crop&auto=format&dpr=2 2x`}
+              alt={item.recipe.label}
+              loading="lazy"
+            />
+            <ImageListItemBar
+              title={item.recipe.label}
+              subtitle={item.author}
+              actionIcon={
+                <IconButton
+                  sx={{ color: "rgba(255, 255, 255, 0.54)" }}
+                  aria-label={`info about ${item.title}`}
+                >
+                  <InfoIcon />
+                </IconButton>
+              }
+            />
+          </ImageListItem>
+        ))}
+      </ImageList>
     </Box>
   );
 }
 
-export default Sidebar;
-
-const itemData = [
-  {
-    img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-    title: "Breakfast",
-    author: "@bkristastucchio",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
-    title: "Burger",
-    author: "@rollelflex_graphy726",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1522770179533-24471fcdba45",
-    title: "Camera",
-    author: "@helloimnik",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
-    title: "Coffee",
-    author: "@nolanissac",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1533827432537-70133748f5c8",
-    title: "Hats",
-    author: "@hjrc33",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62",
-    title: "Honey",
-    author: "@arwinneil",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1516802273409-68526ee1bdd6",
-    title: "Basketball",
-    author: "@tjdragotta",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1518756131217-31eb79b20e8f",
-    title: "Fern",
-    author: "@katie_wasserman",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1597645587822-e99fa5d45d25",
-    title: "Mushrooms",
-    author: "@silverdalex",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1567306301408-9b74779a11af",
-    title: "Tomato basil",
-    author: "@shelleypauls",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1471357674240-e1a485acb3e1",
-    title: "Sea star",
-    author: "@peterlaster",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1589118949245-7d38baf380d6",
-    title: "Bike",
-    author: "@southside_customs",
-  },
-];
-
-// import React, { setState, Component } from "react";
-// import { Container, Row } from "react-bootstrap";
-// import DisplayCard from "../Card/DisplayCard";
-// import MealPlanner from "../MealPlanner/MealPlanner";
-// import { Search } from "../search/Search.jsx";
-// // import { useFetchRecipe } from "../../helpers/ApiHelpers";
-// import "./mainContainer.css";
-
-// class MainContainer extends Component {
-//   constructor() {
-//     super();
-
-//     this.state = {
-//       recipes: [],
-//       searchField: "",
-//     };
-//   }
-//   componentDidMount() {
-//     // const recipe_app_key = process.env.REACT_APP_RECIPE_KEY;
-//     // console.log(recipe_app_key);
-//     const recipe_app_key = "9250dede3c2afdb663839121df608485";
-//     const recipe_app_id = "e56e3fea";
-
-//     const api_url = `https://api.edamam.com/api/recipes/v2?type=public&q=health&app_id=${recipe_app_id}&app_key=${recipe_app_key}`;
-
-//     fetch(api_url)
-//       .then((response) => response.json())
-//       .then((recipesData) => this.setState({ recipes: recipesData.hits }));
-//   }
-
-//   render() {
-//     const { recipes } = this.state;
-//     console.log(recipes);
-
-//     return (
-//       <Container className="sidebar-container">
-//         <Row>
-//           <Search
-//             className="search-component"
-//             placeholder="Search Recipes"
-//             handleChange={(e) => {
-//               this.setState({ searchField: e.target.value });
-//             }}
-//           />
-//           <DisplayCard {...recipes} />
-//         </Row>
-//       </Container>
-//     );
-//   }
-// }
-// export default MainContainer;
+export default MainContainer;
