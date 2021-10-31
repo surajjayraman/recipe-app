@@ -3,7 +3,7 @@ import { Card, ListGroupItem, ListGroup } from "react-bootstrap";
 // import addRecipe from "../MainContainer/MainContainer";
 import "./displayCard.css";
 
-export const DisplayCard = (props) => {
+const DisplayCard = (props) => {
   const data = props;
   const addRecipe = (state, props) => {
     console.log("Clicked");
@@ -46,10 +46,11 @@ export const DisplayCard = (props) => {
             <Card.Link
               href={`${data[item].recipe.url}`}
             >{`${data[item].recipe.source}`}</Card.Link>
-            {/* <button onClick={this.addRecipe.bind(this)}>Add Recipe</button> */}
+            <button onClick={addRecipe}>Add Recipe</button>
           </Card.Body>
         </Card>
       ))}
     </div>
   );
 };
+export default DisplayCard;

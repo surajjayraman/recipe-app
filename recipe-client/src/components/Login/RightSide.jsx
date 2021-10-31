@@ -9,7 +9,7 @@ function RightSide() {
   const [password, setPassword] = useState("");
   const history = useHistory();
   useEffect(() => {
-    if (localStorage.getItem("user-info")) history.push("/mainContainer");
+    if (localStorage.getItem("user-info")) history.push("/home");
   }, []);
   async function login() {
     let item = { email, password };
@@ -24,7 +24,7 @@ function RightSide() {
     });
     result = await result.json();
     localStorage.setItem("user-info", JSON.stringify(result));
-    history.push("/mainContainer");
+    history.push("/home");
   }
   return (
     <div>

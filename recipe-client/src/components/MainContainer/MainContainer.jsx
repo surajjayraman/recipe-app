@@ -1,6 +1,6 @@
 import React, { setState, Component } from "react";
 import { Container, Row } from "react-bootstrap";
-import { DisplayCard } from "../Card/DisplayCard";
+import DisplayCard from "../Card/DisplayCard";
 import MealPlanner from "../MealPlanner/MealPlanner";
 import { Search } from "../search/Search.jsx";
 // import { useFetchRecipe } from "../../helpers/ApiHelpers";
@@ -21,7 +21,7 @@ class MainContainer extends Component {
     const recipe_app_key = "9250dede3c2afdb663839121df608485";
     const recipe_app_id = "e56e3fea";
 
-    const api_url = `https://api.edamam.com/search?q=chicken&app_id=${recipe_app_id}&app_key=${recipe_app_key}`;
+    const api_url = `https://api.edamam.com/search?q=chicken&q=salmon&steak&app_id=${recipe_app_id}&app_key=${recipe_app_key}`;
 
     fetch(api_url)
       .then((response) => response.json())

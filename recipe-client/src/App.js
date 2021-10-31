@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Login from "./components/Login/Login";
-import MainContainer from "./components/MainContainer/MainContainer";
+import MainDisplay from "./components/MainDisplay/MainDisplay";
 
 function App() {
   // const [token, setToken] = useState();
@@ -14,7 +14,7 @@ function App() {
       <div>
         <Switch>
           <Route exact path="/" component={Login} />
-          <Route path="/mainContainer" component={MainContainer} />
+          <Route path="/home" component={MainDisplay} />
           {/* <Login /> */}
         </Switch>
         {/* <Container className="app-container">
