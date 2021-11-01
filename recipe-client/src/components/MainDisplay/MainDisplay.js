@@ -11,9 +11,6 @@ function MainDisplay() {
     <div>
       <Container className="app-container">
         <Row>
-          <Col className="side-bar-col">
-            <SideBar />
-          </Col>
           <Col className="main-col">
             <MainContainer />
           </Col>

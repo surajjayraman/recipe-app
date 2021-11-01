@@ -1,10 +1,19 @@
 import React from "react";
 import { useFetchMyRecipe } from "../../helpers/ApiHelpers";
 import "../Card/displayCard.css";
-import { Card, ListGroupItem, ListGroup } from "react-bootstrap";
+
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Box from "@mui/material/Box";
+import { orange } from "@mui/material/colors";
 
 function MealPlanner() {
   const { data, error, loading } = useFetchMyRecipe();
+  const [value, setValue] = React.useState("one");
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
   // const [recipes, setRecipes] = setState([]);
 
   if (loading) return <p>Still Loading!</p>;
@@ -44,13 +53,24 @@ function MealPlanner() {
   }
 
   return (
-    <div>
+    <div class="mealPlanner-container">
       <h1> Create your Meal Plan</h1>
-      <p>Some description</p>
-      <p>Breakfast | Lunch | Dinner | Snack and Desert</p>
-      {/* {recipes ? recipes : "There is no recipe data available"} */}
+      <Box sx={{ width: "100%" }}>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          textColor="secondary"
+          indicatorColor="secondary"
+          aria-label="secondary tabs example"
+        >
+          <Tab value="Breakfast" label="breakfast" />
+          <Tab value="Lunch" label="lunch" />
+          <Tab value="Dinner" label="dinner" />
+        </Tabs>
+      </Box>
+
       <br />
-      <div className="card-container">
+      {/* <div className="card-container">
         {data.map((item, index) => (
           <Card key={`${index}`} style={{ width: "18rem" }}>
             <Card.Img variant="top" src={`${item.image_url}`} />
@@ -76,7 +96,7 @@ function MealPlanner() {
           </Card>
         ))}
         <button>Delete Recipe</button>
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -1,27 +1,15 @@
-import React, { setState } from "react";
+import React from "react";
 
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
-import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
 import AppBar from "@mui/material/AppBar";
 
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 
-import { orange } from "@mui/material/colors";
-import HomeIcon from "@mui/icons-material/Home";
-import FastfoodIcon from "@mui/icons-material/Fastfood";
-import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import SearchIcon from "@mui/icons-material/Search";
-import FolderOpenIcon from "@mui/icons-material/FolderOpen";
-import CopyrightIcon from "@mui/icons-material/Copyright";
 
-import MenuList from "@mui/material/MenuList";
-import MenuItem from "@mui/material/MenuItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import Typography from "@mui/material/Typography";
 //Search
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
@@ -31,105 +19,137 @@ import ListSubheader from "@mui/material/ListSubheader";
 import InfoIcon from "@mui/icons-material/Info";
 
 import "./mainContainer.css";
-import logo from "../../images/dietDash-small.png";
 import { useFetchRecipe } from "../../helpers/ApiHelpers";
+import { withRouter } from "react-router-dom";
+
+// import InboxIcon from "@material-ui/icons/MoveToInbox";
+// import MailIcon from "@material-ui/icons/Mail";
+// import { makeStyles } from "@material-ui/core/styles";
+// const useStyles = makeStyles({
+//   drawer: {
+//     width: "240px",
+//   },
+// });
 
 const drawerWidth = 240;
 
 function MainContainer(props) {
-  const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
+  // // const { window } = props;
+  // const { history } = props;
+  // const [mobileOpen, setMobileOpen] = React.useState(false);
+  // const classes = useStyles();
+  // const handleDrawerToggle = () => {
+  //   setMobileOpen(!mobileOpen);
+  // };
   const { data, error, loading } = useFetchRecipe();
 
   if (loading) return <p>Still Loading!</p>;
   if (error) throw error;
-  console.log(data.hits);
 
-  const drawer = (
-    <div>
-      {/* <Toolbar /> */}
-      <img src={logo} className="logo" alt="" />
-      <Divider />
-      <MenuList>
-        <MenuItem>
-          <ListItemIcon>
-            <HomeIcon fontSize="small" sx={{ color: orange[500] }} />
-          </ListItemIcon>
-          <Typography variant="inherit">Home</Typography>
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <FastfoodIcon fontSize="small" sx={{ color: orange[500] }} />
-          </ListItemIcon>
-          <Typography variant="inherit">Meal Planner</Typography>
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <NoteAltIcon fontSize="small" sx={{ color: orange[500] }} />
-          </ListItemIcon>
-          <Typography variant="inherit" noWrap>
-            Ingridients List
-          </Typography>
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <SearchIcon fontSize="small" sx={{ color: orange[500] }} />
-          </ListItemIcon>
-          <Typography variant="inherit" noWrap>
-            Browse
-          </Typography>
-        </MenuItem>
-      </MenuList>
+  // const itemsList = [
+  //   {
+  //     text: "Home",
+  //     icon: <HomeIcon fontSize="small" sx={{ color: orange[500] }} />,
+  //     onClick: () => history.push("/"),
+  //   },
+  //   {
+  //     text: "Meal Planner",
+  //     icon: <FastfoodIcon fontSize="small" sx={{ color: orange[500] }} />,
+  //     onClick: () => history.push("/mealPlanner"),
+  //   },
+  //   {
+  //     text: "My Recipes",
+  //     icon: <NoteAltIcon fontSize="small" sx={{ color: orange[500] }} />,
+  //     onClick: () => history.push("/contact"),
+  //   },
+  //   {
+  //     text: "Ingredients List",
+  //     icon: <NoteAltIcon fontSize="small" sx={{ color: orange[500] }} />,
+  //     onClick: () => history.push("/contact"),
+  //   },
+  // ];
 
-      <Divider orientation="horizontal" flexItem>
-        My Collection
-      </Divider>
+  // const drawer = (
+  //   <div>
+  //     {/* <Toolbar /> */}
+  //     <img src={logo} className="logo" alt="" />
+  //     <Divider />
+  //     <MenuList>
+  //       <MenuItem >
+  //         <ListItemIcon>
+  //           <HomeIcon fontSize="small" sx={{ color: orange[500] }} />
+  //         </ListItemIcon>
+  //         <Typography variant="inherit">Home</Typography>
+  //       </MenuItem>
+  //       <MenuItem>
+  //         <ListItemIcon>
+  //           <FastfoodIcon fontSize="small" sx={{ color: orange[500] }} />
+  //         </ListItemIcon>
+  //         <Typography variant="inherit">Meal Planner</Typography>
+  //       </MenuItem>
+  //       <MenuItem>
+  //         <ListItemIcon>
+  //           <NoteAltIcon fontSize="small" sx={{ color: orange[500] }} />
+  //         </ListItemIcon>
+  //         <Typography variant="inherit" noWrap>
+  //           Ingridients List
+  //         </Typography>
+  //       </MenuItem>
+  //       <MenuItem>
+  //         <ListItemIcon>
+  //           <SearchIcon fontSize="small" sx={{ color: orange[500] }} />
+  //         </ListItemIcon>
+  //         <Typography variant="inherit" noWrap>
+  //           Browse
+  //         </Typography>
+  //       </MenuItem>
+  //     </MenuList>
 
-      <MenuList>
-        <MenuItem>
-          <ListItemIcon>
-            <FolderOpenIcon fontSize="small" sx={{ color: orange[500] }} />
-          </ListItemIcon>
-          <Typography variant="inherit">Breakfast</Typography>
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <FolderOpenIcon fontSize="small" sx={{ color: orange[500] }} />
-          </ListItemIcon>
-          <Typography variant="inherit">Lunch</Typography>
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <FolderOpenIcon fontSize="small" sx={{ color: orange[500] }} />
-          </ListItemIcon>
-          <Typography variant="inherit" noWrap>
-            Dinner
-          </Typography>
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <FolderOpenIcon fontSize="small" sx={{ color: orange[500] }} />
-          </ListItemIcon>
-          <Typography variant="inherit" noWrap>
-            Snack
-          </Typography>
-        </MenuItem>
-      </MenuList>
-      <Divider />
+  //     <Divider orientation="horizontal" flexItem>
+  //       My Collection
+  //     </Divider>
 
-      <Typography variant="inherit">
-        <CopyrightIcon fontSize="small" sx={{ color: orange[500] }} /> DietDash.
-        2021.
-      </Typography>
-    </div>
-  );
+  //     <MenuList>
+  //       <MenuItem>
+  //         <ListItemIcon>
+  //           <FolderOpenIcon fontSize="small" sx={{ color: orange[500] }} />
+  //         </ListItemIcon>
+  //         <Typography variant="inherit">Breakfast</Typography>
+  //       </MenuItem>
+  //       <MenuItem>
+  //         <ListItemIcon>
+  //           <FolderOpenIcon fontSize="small" sx={{ color: orange[500] }} />
+  //         </ListItemIcon>
+  //         <Typography variant="inherit">Lunch</Typography>
+  //       </MenuItem>
+  //       <MenuItem>
+  //         <ListItemIcon>
+  //           <FolderOpenIcon fontSize="small" sx={{ color: orange[500] }} />
+  //         </ListItemIcon>
+  //         <Typography variant="inherit" noWrap>
+  //           Dinner
+  //         </Typography>
+  //       </MenuItem>
+  //       <MenuItem>
+  //         <ListItemIcon>
+  //           <FolderOpenIcon fontSize="small" sx={{ color: orange[500] }} />
+  //         </ListItemIcon>
+  //         <Typography variant="inherit" noWrap>
+  //           Snack
+  //         </Typography>
+  //       </MenuItem>
+  //     </MenuList>
+  //     <Divider />
 
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
+  //     <Typography variant="inherit">
+  //       <CopyrightIcon fontSize="small" sx={{ color: orange[500] }} /> DietDash.
+  //       2021.
+  //     </Typography>
+  //   </div>
+  // );
+
+  // const container =
+  //   window !== undefined ? () => window().document.body : undefined;
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -156,13 +176,25 @@ function MainContainer(props) {
           </IconButton>
         </Paper>
       </AppBar>
-      <Box
-        component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
-      >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Drawer
+
+      {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+      {/* <MUIDrawer variant="permanent" className={classes.drawer}>
+          <img src={logo} className="logo" alt="" />
+          <Divider />
+          <List>
+            {itemsList.map((item, index) => {
+              const { text, icon, onClick } = item;
+              return (
+                <ListItem button key={text} onClick={onClick}>
+                  {icon && <ListItemIcon>{icon}</ListItemIcon>}
+                  <ListItemText primary={text} />
+                </ListItem>
+              );
+            })}
+          </List>
+        </MUIDrawer> */}
+
+      {/* <Drawer
           container={container}
           variant="temporary"
           open={mobileOpen}
@@ -192,8 +224,7 @@ function MainContainer(props) {
           open
         >
           {drawer}
-        </Drawer>
-      </Box>
+        </Drawer> */}
 
       <ImageList sx={{ width: 1030, height: 1400, marginLeft: 8 }}>
         <ImageListItem key="Subheader" cols={4}>
@@ -226,4 +257,4 @@ function MainContainer(props) {
   );
 }
 
-export default MainContainer;
+export default withRouter(MainContainer);
