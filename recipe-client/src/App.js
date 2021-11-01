@@ -6,6 +6,7 @@ import Login from "./components/Login/Login";
 import MainDisplay from "./components/MainDisplay/MainDisplay";
 import MealPlanner from "./components/MealPlanner/MealPlanner";
 import Drawer from "./components/Drawer/Drawer";
+import MainContainer from "./components/MainContainer/MainContainer";
 const useStyles = makeStyles({
   container: {
     display: "flex",
@@ -27,6 +28,7 @@ function App() {
 
             <Route path="/home" component={MainDisplay} />
             <Route path="/mealPlanner" component={MealPlanner} />
+            <Route exact path="/" component={MainContainer} />
           </div>
           {/* <Login /> */}
         </Switch>

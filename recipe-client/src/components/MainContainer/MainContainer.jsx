@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -22,134 +22,49 @@ import "./mainContainer.css";
 import { useFetchRecipe } from "../../helpers/ApiHelpers";
 import { withRouter } from "react-router-dom";
 
-// import InboxIcon from "@material-ui/icons/MoveToInbox";
-// import MailIcon from "@material-ui/icons/Mail";
-// import { makeStyles } from "@material-ui/core/styles";
-// const useStyles = makeStyles({
-//   drawer: {
-//     width: "240px",
-//   },
-// });
+
 
 const drawerWidth = 240;
 
 function MainContainer(props) {
-  // // const { window } = props;
-  // const { history } = props;
-  // const [mobileOpen, setMobileOpen] = React.useState(false);
-  // const classes = useStyles();
-  // const handleDrawerToggle = () => {
-  //   setMobileOpen(!mobileOpen);
-  // };
-  const { data, error, loading } = useFetchRecipe();
+ // begin search implementation
+ const APP_ID = '';
+ const APP_KEY = '';  
+ 
+ const [recipes, setRecipes] = useState([]);
+ const [search, setSearch] = useState('');
+ const [query, setQuery] = useState("salmon");
 
-  if (loading) return <p>Still Loading!</p>;
-  if (error) throw error;
+ //const { data, error, loading } = useFetchRecipe();
 
-  // const itemsList = [
-  //   {
-  //     text: "Home",
-  //     icon: <HomeIcon fontSize="small" sx={{ color: orange[500] }} />,
-  //     onClick: () => history.push("/"),
-  //   },
-  //   {
-  //     text: "Meal Planner",
-  //     icon: <FastfoodIcon fontSize="small" sx={{ color: orange[500] }} />,
-  //     onClick: () => history.push("/mealPlanner"),
-  //   },
-  //   {
-  //     text: "My Recipes",
-  //     icon: <NoteAltIcon fontSize="small" sx={{ color: orange[500] }} />,
-  //     onClick: () => history.push("/contact"),
-  //   },
-  //   {
-  //     text: "Ingredients List",
-  //     icon: <NoteAltIcon fontSize="small" sx={{ color: orange[500] }} />,
-  //     onClick: () => history.push("/contact"),
-  //   },
-  // ];
+  //if (loading) return <p>Still Loading!</p>;
+  //if (error) throw error;
 
-  // const drawer = (
-  //   <div>
-  //     {/* <Toolbar /> */}
-  //     <img src={logo} className="logo" alt="" />
-  //     <Divider />
-  //     <MenuList>
-  //       <MenuItem >
-  //         <ListItemIcon>
-  //           <HomeIcon fontSize="small" sx={{ color: orange[500] }} />
-  //         </ListItemIcon>
-  //         <Typography variant="inherit">Home</Typography>
-  //       </MenuItem>
-  //       <MenuItem>
-  //         <ListItemIcon>
-  //           <FastfoodIcon fontSize="small" sx={{ color: orange[500] }} />
-  //         </ListItemIcon>
-  //         <Typography variant="inherit">Meal Planner</Typography>
-  //       </MenuItem>
-  //       <MenuItem>
-  //         <ListItemIcon>
-  //           <NoteAltIcon fontSize="small" sx={{ color: orange[500] }} />
-  //         </ListItemIcon>
-  //         <Typography variant="inherit" noWrap>
-  //           Ingridients List
-  //         </Typography>
-  //       </MenuItem>
-  //       <MenuItem>
-  //         <ListItemIcon>
-  //           <SearchIcon fontSize="small" sx={{ color: orange[500] }} />
-  //         </ListItemIcon>
-  //         <Typography variant="inherit" noWrap>
-  //           Browse
-  //         </Typography>
-  //       </MenuItem>
-  //     </MenuList>
+  const exampleReq = `https://api.edamam.com/api/recipes/v2?type=public&q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`;
 
-  //     <Divider orientation="horizontal" flexItem>
-  //       My Collection
-  //     </Divider>
+  useEffect (() => {
+    console.log("Effect has been run");
+    getRecipes();
+  },[query]);
 
-  //     <MenuList>
-  //       <MenuItem>
-  //         <ListItemIcon>
-  //           <FolderOpenIcon fontSize="small" sx={{ color: orange[500] }} />
-  //         </ListItemIcon>
-  //         <Typography variant="inherit">Breakfast</Typography>
-  //       </MenuItem>
-  //       <MenuItem>
-  //         <ListItemIcon>
-  //           <FolderOpenIcon fontSize="small" sx={{ color: orange[500] }} />
-  //         </ListItemIcon>
-  //         <Typography variant="inherit">Lunch</Typography>
-  //       </MenuItem>
-  //       <MenuItem>
-  //         <ListItemIcon>
-  //           <FolderOpenIcon fontSize="small" sx={{ color: orange[500] }} />
-  //         </ListItemIcon>
-  //         <Typography variant="inherit" noWrap>
-  //           Dinner
-  //         </Typography>
-  //       </MenuItem>
-  //       <MenuItem>
-  //         <ListItemIcon>
-  //           <FolderOpenIcon fontSize="small" sx={{ color: orange[500] }} />
-  //         </ListItemIcon>
-  //         <Typography variant="inherit" noWrap>
-  //           Snack
-  //         </Typography>
-  //       </MenuItem>
-  //     </MenuList>
-  //     <Divider />
+  const getRecipes = async () => {
+    const response = await fetch(exampleReq);
+    const data = await response.json();
+    console.log(data.hits);
+    setRecipes(data.hits);
+  }  
 
-  //     <Typography variant="inherit">
-  //       <CopyrightIcon fontSize="small" sx={{ color: orange[500] }} /> DietDash.
-  //       2021.
-  //     </Typography>
-  //   </div>
-  // );
+  const updateSearch = e => {
+    setSearch(e.target.value);
+    
+  }
 
-  // const container =
-  //   window !== undefined ? () => window().document.body : undefined;
+  const getSearch = e => {
+    e.preventDefault();
+    setQuery(search);
+    setSearch('');
+  }
+
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -161,76 +76,23 @@ function MainContainer(props) {
           ml: { sm: `${drawerWidth}px` },
         }}
       >
-        <Paper
-          component="form"
-          sx={{
-            p: "2px 4px",
-            display: "flex",
-            alignItems: "center",
-            width: 400,
-          }}
-        >
-          <InputBase sx={{ ml: 1, flex: 1 }} placeholder="Search for Recipes" />
-          <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
-            <SearchIcon />
-          </IconButton>
-        </Paper>
+      <div className="App">        
+        <form onSubmit={getSearch} className="search-form">
+          <input className="search-bar" type="text" value={search} onChange={updateSearch}/>
+          <button className="search-button" type="submit">
+            Search
+          </button>
+        </form>               
+      </div>
+        
       </AppBar>
 
-      {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-      {/* <MUIDrawer variant="permanent" className={classes.drawer}>
-          <img src={logo} className="logo" alt="" />
-          <Divider />
-          <List>
-            {itemsList.map((item, index) => {
-              const { text, icon, onClick } = item;
-              return (
-                <ListItem button key={text} onClick={onClick}>
-                  {icon && <ListItemIcon>{icon}</ListItemIcon>}
-                  <ListItemText primary={text} />
-                </ListItem>
-              );
-            })}
-          </List>
-        </MUIDrawer> */}
-
-      {/* <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-        >
-          {drawer}
-        </Drawer>
-        <Drawer
-          variant="permanent"
-          sx={{
-            display: { xs: "none", sm: "block" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-          open
-        >
-          {drawer}
-        </Drawer> */}
-
+      
       <ImageList sx={{ width: 1030, height: 1400, marginLeft: 8 }}>
         <ImageListItem key="Subheader" cols={4}>
           <ListSubheader component="div">For You</ListSubheader>
         </ImageListItem>
-        {data.hits.map((item, index) => (
+        {recipes.map((item, index) => (
           <ImageListItem key={`${index}`}>
             <img
               src={`${item.recipe.image}?w=248&fit=crop&auto=format`}
