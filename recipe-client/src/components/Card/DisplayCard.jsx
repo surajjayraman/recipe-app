@@ -1,42 +1,56 @@
-import React, { useState } from "react";
+import React from "react";
 import { Card, ListGroupItem, ListGroup } from "react-bootstrap";
-import { useFetchRecipe } from "../../helpers/ApiHelpers";
-
+// import addRecipe from "../MainContainer/MainContainer";
 import "./displayCard.css";
 
-export const DisplayCard = () => {
-  const { data, error, loading } = useFetchRecipe();
-
-  if (loading) return <p>Still Loading!</p>;
-  if (error) throw error;
-  console.log(data);
+const DisplayCard = (props) => {
+  const data = props;
+  const addRecipe = (state, props) => {
+    console.log("Clicked");
+    fetch("http://localhost:8080/recipe", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({}),
+    })
+      .then((response) => {
+        return response.text();
+      })
+      .then((data) => {
+        alert(data);
+        // useFetchMyRecipe();
+      });
+  };
 
   return (
     <div className="card-container">
-      {data.hits.map((item, index) => (
+      {Object.keys(data).map((item, index) => (
         <Card key={`${index}`} style={{ width: "18rem" }}>
-          <Card.Img variant="top" src={`${item.recipe.image}`} />
+          <Card.Img variant="top" src={`${data[item].recipe.image}`} />
           <Card.Body>
-            <Card.Title>{`${item.recipe.label}`}</Card.Title>
+            <Card.Title>{`${data[item].recipe.label}`}</Card.Title>
           </Card.Body>
           <ListGroup className="list-group-flush">
             <ListGroupItem>
-              Cuisine Type: {`${item.recipe.cuisineType}`}
+              Cuisine Type: {`${data[item].recipe.cuisineType}`}
             </ListGroupItem>
             <ListGroupItem>
               {" "}
-              <Card.Link href="{`${item.recipe.ingredients}`}">
+              <Card.Link href="{`${data[item].recipe.ingredients}`}">
                 Ingridient List
               </Card.Link>{" "}
             </ListGroupItem>
           </ListGroup>
           <Card.Body>
             <Card.Link
-              href={`${item.recipe.url}`}
-            >{`${item.recipe.source}`}</Card.Link>
+              href={`${data[item].recipe.url}`}
+            >{`${data[item].recipe.source}`}</Card.Link>
+            <button onClick={addRecipe}>Add Recipe</button>
           </Card.Body>
         </Card>
       ))}
     </div>
   );
 };
+export default DisplayCard;
