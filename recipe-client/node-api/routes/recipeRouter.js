@@ -68,8 +68,10 @@ const addRecipes = (body) => {
   });
 };
 const deleteRecipe = () => {
+  console.log("Id from Router>>>>>>>>");
   return new Promise(function (resolve, reject) {
     const id = parseInt(request.params.id);
+    console.log("Id from Router>>>>>>>>", request.params.id);
     pool.query("DELETE FROM recipe WHERE id = $1", [id], (error, results) => {
       if (error) {
         reject(error);

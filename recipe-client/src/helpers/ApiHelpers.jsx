@@ -8,7 +8,7 @@ const recipe_app_id = "e56e3fea";
 // API for fetching recipe
 export const useFetchRecipe = () =>
   useFetch(
-    `https://api.edamam.com/search?q=chicken&app_id=${recipe_app_id}&app_key=${recipe_app_key}`
+    `https://api.edamam.com/api/recipes/v2?type=public&q=health&app_id=${recipe_app_id}&app_key=${recipe_app_key}`
   );
 
 export const useFetchMyRecipe = () => useFetch(`http://localhost:8080/recipe`);

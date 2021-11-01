@@ -4,3 +4,23 @@
 .sidebar-container {
   width: 100%;
 }
+.logo {
+  width: 15em;
+  height: auto;
+  margin: 1em 0;
+}
+.MuiBox-root {
+  margin-top: -1.5em;
+  width: 1400px;
+  height: auto;
+}
+.mainContainer-image {
+  width: 250px !important;
+}
+.MuiImageListItem-root {
+  width: 250px;
+}
+.MuiImageList-root {
+  gap: 10px !important;
+  /* width: 1200px ; */
+}

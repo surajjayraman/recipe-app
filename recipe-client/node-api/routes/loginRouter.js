@@ -27,6 +27,7 @@ const addUser = (body) => {
       [user_id],
       (error, results) => {
         if (error) {
+          // console.log(error);
           reject(error);
         }
         resolve(`A new user has been added: ${results.rows[0]}`);
