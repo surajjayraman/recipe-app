@@ -14,7 +14,7 @@ const loginRouter = require("./routes/loginRouter.js");
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:8080",
+    origin: "http://localhost:3000",
     methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
   })
 );
@@ -64,6 +64,8 @@ app.post("/recipe", cors(), (req, res) => {
 });
 
 app.delete("/recipe/:id", cors(), (req, res) => {
+  console.log("In delete: ", req.params.id);
+
   recipeRouter
     .deleteRecipe(req.params.id)
     .then((response) => {

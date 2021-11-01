@@ -67,11 +67,13 @@ const addRecipes = (body) => {
     );
   });
 };
-const deleteRecipe = () => {
+const deleteRecipe = (recipeId) => {
   return new Promise(function (resolve, reject) {
-    const id = parseInt(request.params.id);
-    pool.query("DELETE FROM recipe WHERE id = $1", [id], (error, results) => {
+    const id = parseInt(recipeId);
+    console.log("In delete recipe:", id);
+    pool.query("DELETE FROM recipe WHERE recipe_id = $1", [id], (error, results) => {
       if (error) {
+        console.log(error);
         reject(error);
       }
       resolve(`Recipe deleted with ID: ${id}`);
