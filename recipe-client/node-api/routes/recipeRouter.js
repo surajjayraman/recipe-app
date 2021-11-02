@@ -1,9 +1,9 @@
 const Pool = require("pg").Pool;
 const pool = new Pool({
-  user: "vagrant",
+  user: "labber",
   host: "localhost",
   database: "dietdash_db",
-  password: "123",
+  password: "labber",
   port: 5432,
 });
 
@@ -67,12 +67,12 @@ const addRecipes = (body) => {
     );
   });
 };
-const deleteRecipe = () => {
-  console.log("Id from Router>>>>>>>>");
+
+const deleteRecipe = (recipeId) => {
   return new Promise(function (resolve, reject) {
-    const id = parseInt(request.params.id);
-    console.log("Id from Router>>>>>>>>", request.params.id);
-    pool.query("DELETE FROM recipe WHERE id = $1", [id], (error, results) => {
+    const id = parseInt(recipeId);
+    console.log("In delete recipe:", id);
+    pool.query("DELETE FROM recipe WHERE recipe_id = $1", [id], (error, results) => {
       if (error) {
         console.log(error);
         reject(error);
@@ -80,7 +80,8 @@ const deleteRecipe = () => {
       resolve(`Recipe deleted with ID: ${id}`);
     });
   });
-};
+ };
+ 
 
 module.exports = {
   getRecipes,

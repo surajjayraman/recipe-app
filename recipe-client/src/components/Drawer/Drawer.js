@@ -40,7 +40,7 @@ const Drawer = (props) => {
     {
       text: "My Recipes",
       icon: <NoteAltIcon fontSize="small" sx={{ color: orange[500] }} />,
-      onClick: () => history.push("/contact"),
+      onClick: () => window.open('http://localhost:8001/home', '_blank'),
     },
     {
       text: "Ingredients List",

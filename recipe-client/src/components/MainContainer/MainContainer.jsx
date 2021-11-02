@@ -29,7 +29,7 @@ const drawerWidth = 240;
 function MainContainer(props) {
  // begin search implementation
  const APP_ID = '';
- const APP_KEY = '';  
+ const APP_KEY = '';    
  
  const [recipes, setRecipes] = useState([]);
  const [search, setSearch] = useState('');
