@@ -23,6 +23,7 @@ const getRecipes = () => {
   });
 };
 const addRecipes = (body) => {
+  console.log("from the router>>>>>>");
   return new Promise(function (resolve, reject) {
     const {
       user_id,
@@ -62,7 +63,7 @@ const addRecipes = (body) => {
         if (error) {
           reject(error);
         }
-        resolve(`A new recipe has been added added: ${results.rows[0]}`);
+        resolve(`A new recipe has been added added`);
       }
     );
   });
@@ -76,7 +77,7 @@ const deleteRecipe = () => {
       if (error) {
         reject(error);
       }
-      resolve(`Recipe deleted with ID: ${id}`);
+      resolve(`Recipe deleted`);
     });
   });
 };

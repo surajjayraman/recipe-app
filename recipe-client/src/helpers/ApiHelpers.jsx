@@ -15,15 +15,16 @@ export const useFetchMyRecipe = () => useFetch(`http://localhost:8080/recipe`);
 
 export const useFetchBreakfast = () =>
   useFetch(
-    `https://api.edamam.com/api/recipes/v2?type=public&q=health&app_id=e56e3fea&app_key=9250dede3c2afdb663839121df608485&mealType=Breakfast`
+    `https://api.edamam.com/api/recipes/v2?type=public&q=health&app_id=${recipe_app_id}&app_key=${recipe_app_key}&mealType=Breakfast&dishType=Main%20course`
   );
 
 export const useFetchLunch = () =>
   useFetch(
-    `https://api.edamam.com/api/recipes/v2?type=public&q=health&app_id=${recipe_app_id}&app_key=${recipe_app_key}&mealType=Lunch&dishType=Main%20course`
+    `https://api.edamam.com/search?app_id=${recipe_app_id}&app_key=${recipe_app_key}q=health&from=0&to=30dishType=main&mealType=lunch`
   );
 export const useFetchDinner = () =>
   useFetch(
-    `https://api.edamam.com/api/recipes/v2?type=public&q=health&app_id=${recipe_app_id}&app_key=${recipe_app_key}&mealType=Dinner&dishType=Main%20course`
+    `https://api.edamam.com/api/recipes/v2?type=public&q=health&app_id=${recipe_app_id}&app_key=${recipe_app_key}&mealType=Breakfast&dishType=Main%20course`
   );
-// https://api.edamam.com/api/recipes/v2?type=public&q=health&app_id=${recipe_app_id}&app_key=${recipe_app_id}&mealType=Breakfast
+
+// https://api.edamam.com/api/recipes/v2?type=public&q=health&app_id=e56e3fea&app_key=9250dede3c2afdb663839121df608485&mealType=Breakfast&dishType=Main%20course

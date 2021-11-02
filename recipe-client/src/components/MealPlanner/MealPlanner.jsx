@@ -51,11 +51,12 @@ function a11yProps(index) {
 }
 
 function MealPlanner() {
+  // if()
   // const { data, error, loading } = useFetchRecipe();
   const { data, error, loading } = useFetchBreakfast();
+
   const { lunchData, lunchError, lunchloading } = useFetchLunch();
   const { dinnerData, dinnerError, dinnerloading } = useFetchDinner();
-
   const [value, setValue] = React.useState(0);
 
   console.log(">>>>>>>>", data);

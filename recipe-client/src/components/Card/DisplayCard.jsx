@@ -2,6 +2,7 @@ import React from "react";
 // import { Card, ListGroupItem, ListGroup } from "react-bootstrap";
 // import addRecipe from "../MainContainer/MainContainer";
 import "./displayCard.css";
+import axios from "axios";
 
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -12,29 +13,88 @@ import Typography from "@mui/material/Typography";
 
 const DisplayCard = (props) => {
   const data = props.props.hits;
-  console.log(data[1]);
-  // const addRecipe = (state, props) => {
-  //   console.log("Clicked");
-  //   fetch("http://localhost:8080/recipe", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({}),
-  //   })
-  //     .then((response) => {
-  //       return response.text();
-  //     })
-  //     .then((data) => {
-  //       alert(data);
-  //       // useFetchMyRecipe();
-  //     });
-  // };
+  console.log("from display card>>>>>>", data);
+
+  const addRecipe = (addData) => {
+    console.log("inside addReacipe>>>>>", addData);
+    const user_info = JSON.parse(localStorage.getItem("user-info"));
+
+    const user_id = user_info[0].id;
+    const recipe_name = addData.recipe.label;
+    const image_url = addData.recipe.image;
+    const prep_time = addData.recipe.totalTime;
+    const serving_size = addData.recipe.yild;
+    const cuisine_type = addData.recipe.cuisineType[0];
+    const source = addData.recipe.source;
+    const preparation = addData.recipe.url;
+    const ingredients = addData.recipe.ingredients;
+    const meal_type = addData.recipe.mealType[0];
+    const calories = addData.recipe.calories;
+    const fat = addData.recipe.digest[0].label;
+    const carbs = addData.recipe.digest[1].label;
+    const protein = addData.recipe.digest[2].label;
+    // axios({
+    //   method: "post",
+    //   url: "http://localhost:8080/recipe",
+    //   data: {
+    //     user_id: user_id,
+    //     recipe_name: recipe_name,
+    //     image_url: image_url,
+    //     prep_time: prep_time,
+    //     serving_size: serving_size,
+    //     cuisine_type: cuisine_type,
+    //     source: source,
+    //     preparation: preparation,
+    //     ingredients: ingredients,
+    //     meal_type: meal_type,
+    //     calories: calories,
+    //     fat: fat,
+    //     carbs: carbs,
+    //     protein: protein,
+    //   },
+    // })
+    //   .then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+
+    fetch("http://localhost:8080/recipe", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify({
+        user_id,
+        recipe_name,
+        image_url,
+        prep_time,
+        serving_size,
+        cuisine_type,
+        source,
+        preparation,
+        ingredients,
+        meal_type,
+        calories,
+        fat,
+        carbs,
+        protein,
+      }),
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div className="card-container">
       {Object.keys(data).map((item, index) => (
-        <Card sx={{ maxWidth: 345 }} key={`${index}`}>
+        <Card sx={{ width: 300 }} key={`${index}`}>
           <CardMedia
             component="img"
             alt="Meal Image"
@@ -46,13 +106,29 @@ const DisplayCard = (props) => {
               {`${data[item].recipe.label}`}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Lizards are a widespread group of squamate reptiles, with over
-              6,000 species, ranging across all continents except Antarctica
+              Calories: {`${data[item].recipe.calories}`}
+              {/* {Object.keys(data[item].recipe.ingredients).map((itm, idx) => ( */}
+              {/* <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  key={`${idx}`}
+                > */}
+              {/* {`${data[item].recipe.ingredients[itm].text}`} */}
+              {/* </Typography> */}
+              {/* ))} */}
+            </Typography>
+
+            <Typography variant="body2" color="text.secondary">
+              Cuisine Type: {`${data[item].recipe.cuisineType[0]}`}
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small">Share</Button>
-            <Button size="small">Learn More</Button>
+            <Button size="small" onClick={`${data[item].recipe.url}`}>
+              Recipe
+            </Button>
+            <Button size="small" onClick={() => addRecipe(data[item])}>
+              Add to My Recipe
+            </Button>
           </CardActions>
         </Card>
       ))}
