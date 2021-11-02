@@ -23,16 +23,16 @@ const DisplayCard = (props) => {
     const recipe_name = addData.recipe.label;
     const image_url = addData.recipe.image;
     const prep_time = addData.recipe.totalTime;
-    const serving_size = addData.recipe.yild;
+    const serving_size = addData.recipe.yield;
     const cuisine_type = addData.recipe.cuisineType[0];
     const source = addData.recipe.source;
     const preparation = addData.recipe.url;
     const ingredients = addData.recipe.ingredients;
     const meal_type = addData.recipe.mealType[0];
     const calories = addData.recipe.calories;
-    const fat = addData.recipe.digest[0].label;
-    const carbs = addData.recipe.digest[1].label;
-    const protein = addData.recipe.digest[2].label;
+    const fat = addData.recipe.digest[0].total;
+    const carbs = addData.recipe.digest[1].total;
+    const protein = addData.recipe.digest[2].total;
     // axios({
     //   method: "post",
     //   url: "http://localhost:8080/recipe",

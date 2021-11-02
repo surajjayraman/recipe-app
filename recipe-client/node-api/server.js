@@ -63,7 +63,7 @@ app.get("/recipe", cors(), (req, res) => {
 });
 
 app.post("/recipe", cors(), (req, res) => {
-  console.log("from the server>>>>>>");
+  console.log("from the server>>>>>>", req.body);
   recipeRouter
     .addRecipes(req.body)
     .then((response) => {
@@ -71,6 +71,7 @@ app.post("/recipe", cors(), (req, res) => {
       res.status(200).send(response);
     })
     .catch((error) => {
+      console.log("error from the server>>>>>>", error);
       res.status(500).send(error);
     });
 });
@@ -97,14 +98,14 @@ app.get("/recipe/:id", cors(), (req, res) => {
 // });
 
 app.delete("/recipe/:id", cors(), (req, res) => {
-  console.log("from server.js>>>>>> trying");
   recipeRouter
     .deleteRecipe(req.params.id)
     .then((response) => {
+      console.log("from delete post ++++++++++", response);
       res.status(200).send(response);
     })
     .catch((error) => {
-      console.log("from server.js>>>>>> error");
+      console.log("from server.js>>>>>> error", error);
       res.status(500).send(error);
     });
 });

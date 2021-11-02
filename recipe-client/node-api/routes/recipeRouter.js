@@ -41,6 +41,7 @@ const addRecipes = (body) => {
       carbs,
       protein,
     } = body;
+    console.log("%%%calories", calories, fat, carbs, protein);
     pool.query(
       "INSERT INTO recipe (user_id, recipe_name, image_url, prep_time, serving_size, cuisine_type, source, preparation, ingredients, meal_type, calories, fat, carbs, protein) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING *",
       [
@@ -54,10 +55,10 @@ const addRecipes = (body) => {
         preparation,
         ingredients,
         meal_type,
-        calories,
-        fat,
-        carbs,
-        protein,
+        parseInt(calories),
+        parseInt(fat),
+        parseInt(carbs),
+        parseInt(protein),
       ],
       (error, results) => {
         if (error) {
@@ -72,14 +73,17 @@ const deleteRecipe = (recipeId) => {
   console.log("Id from Router>>>>>>>>");
   return new Promise(function (resolve, reject) {
     const id = parseInt(recipeId);
-    console.log("Id from Router>>>>>>>>", request.params.id);
-    pool.query("DELETE FROM recipe WHERE id = $1", [id], (error, results) => {
-      if (error) {
-        console.log(error);
-        reject(error);
+    pool.query(
+      "DELETE FROM recipe WHERE recipe_id = $1",
+      [id],
+      (error, results) => {
+        if (error) {
+          console.log(error);
+          reject(error);
+        }
+        resolve(`Recipe deleted`);
       }
-      resolve(`Recipe deleted`);
-    });
+    );
   });
 };
 
