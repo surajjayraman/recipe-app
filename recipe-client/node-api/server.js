@@ -67,7 +67,6 @@ app.post("/recipe", cors(), (req, res) => {
   recipeRouter
     .addRecipes(req.body)
     .then((response) => {
-      console.log("if it works>>>>");
       res.status(200).send(response);
     })
     .catch((error) => {
@@ -125,6 +124,7 @@ app.post("/ingredients", cors(), (req, res) => {
   ingredientsRouter
     .addIngredients(req.body)
     .then((response) => {
+      console.log("if it works>>>>");
       res.status(200).send(response);
     })
     .catch((error) => {

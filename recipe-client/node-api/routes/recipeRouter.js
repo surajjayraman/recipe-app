@@ -23,7 +23,6 @@ const getRecipes = () => {
   });
 };
 const addRecipes = (body) => {
-  console.log("from the router>>>>>>");
   return new Promise(function (resolve, reject) {
     const {
       user_id,

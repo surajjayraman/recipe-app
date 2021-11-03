@@ -12,13 +12,11 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 const DisplayCard = (props) => {
+  console.log(props);
   const data = props.props.hits;
-  console.log("from display card>>>>>>", data);
 
   const addRecipe = (addData) => {
-    console.log("inside addReacipe>>>>>", addData);
     const user_info = JSON.parse(localStorage.getItem("user-info"));
-
     const user_id = user_info[0].id;
     const recipe_name = addData.recipe.label;
     const image_url = addData.recipe.image;
@@ -33,32 +31,6 @@ const DisplayCard = (props) => {
     const fat = addData.recipe.digest[0].total;
     const carbs = addData.recipe.digest[1].total;
     const protein = addData.recipe.digest[2].total;
-    // axios({
-    //   method: "post",
-    //   url: "http://localhost:8080/recipe",
-    //   data: {
-    //     user_id: user_id,
-    //     recipe_name: recipe_name,
-    //     image_url: image_url,
-    //     prep_time: prep_time,
-    //     serving_size: serving_size,
-    //     cuisine_type: cuisine_type,
-    //     source: source,
-    //     preparation: preparation,
-    //     ingredients: ingredients,
-    //     meal_type: meal_type,
-    //     calories: calories,
-    //     fat: fat,
-    //     carbs: carbs,
-    //     protein: protein,
-    //   },
-    // })
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
 
     fetch("http://localhost:8080/recipe", {
       method: "POST",

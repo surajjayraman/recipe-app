@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFetchMyRecipe } from "../../helpers/ApiHelpers";
 import "../Card/displayCard.css";
 
@@ -8,38 +8,22 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-
-// import { Card, ListGroupItem, ListGroup } from "react-bootstrap";
+import Link from "@mui/material/Link";
 
 function MyRecipes() {
-  const { data, error, loading } = useFetchMyRecipe();
-
-  console.log(data);
-
-  // function getRecipes() {
-  //   fetch("http://localhost:8080/recipe")
-  //     .then((response) => {
-  //       console.log(response);
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       setRecipes(data);
-  //     });
-  // }
+  const { data, error, loading, refreshData } = useFetchMyRecipe();
+  const [buttonPopup, setButtonPopup] = useState(false);
 
   function removeRecipe(deleteData) {
-    // let id = prompt("Enter recipe id");
     console.log(">>>>>", deleteData.recipe_id);
     fetch(`http://localhost:8080/recipe/${deleteData.recipe_id}`, {
       method: "DELETE",
     })
       .then((response) => {
+        refreshData();
         return response.text();
       })
-      .then((data) => {
-        // alert(data);
-        // useFetchMyRecipe();
-      });
+      .then((data) => {});
   }
   if (loading) return <p>Still Loading!</p>;
   if (error) throw error;
@@ -48,7 +32,6 @@ function MyRecipes() {
     <div>
       <h1> My Recipes</h1>
 
-      {/* {recipes ? recipes : "There is no recipe data available"} */}
       <br />
       <div className="card-container">
         {Object.keys(data).map((item, index) => (
@@ -63,18 +46,7 @@ function MyRecipes() {
               <Typography gutterBottom variant="h5" component="div">
                 {`${data[item].recipe_name}`}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {/* Calories: {`${data[item].recipe.calories}`} */}
-                {/* {Object.keys(data[item].recipe.ingredients).map((itm, idx) => ( */}
-                {/* <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  key={`${idx}`}
-                > */}
-                {/* {`${data[item].recipe.ingredients[itm].text}`} */}
-                {/* </Typography> */}
-                {/* ))} */}
-              </Typography>
+              <Typography variant="body2" color="text.secondary"></Typography>
               <Typography variant="body2" color="text.secondary">
                 Calories: {`${data[item].calories}`}
               </Typography>
@@ -86,6 +58,7 @@ function MyRecipes() {
                 Meal Type: {`${data[item].meal_type}`}
               </Typography>
             </CardContent>
+
             <CardActions>
               <Button size="small">Recipe</Button>
               <Button size="small" onClick={() => removeRecipe(data[item])}>

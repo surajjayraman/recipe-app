@@ -11,17 +11,10 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import DeleteIcon from "@mui/icons-material/Delete";
-import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 
-function generate(element) {
-  return [0, 1, 2].map((value) =>
-    React.cloneElement(element, {
-      key: value,
-    })
-  );
-}
+import { useFetchMyIngredients } from "../../helpers/ApiHelpers";
 
 const Demo = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -30,26 +23,54 @@ const Demo = styled("div")(({ theme }) => ({
 class IngredientList extends Component {
   constructor(props) {
     super(props);
-    this.state = { value: "" };
+    this.state = { value: "", ingredientData: null };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
     this.setState({ value: event.target.value });
-
-    // console.log(data.get("email")); // reference by form input's `name` tag
-
-    // fetch("/api/form-submit-url", {
-    //   method: "POST",
-    //   body: data,
-    // });
   }
 
   handleSubmit(event) {
-    alert("A name was submitted: " + this.state.value);
+    const formData = this.state.value;
+
+    const user_info = JSON.parse(localStorage.getItem("user-info"));
+
+    const user_id = user_info[0].id;
+    const ingridient_name = formData;
+
+    fetch("http://localhost:8080/ingredients", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify({
+        user_id,
+        ingridient_name,
+      }),
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    // alert("A name was submitted: " + this.state.value);
     event.preventDefault();
+    this.seState = { value: "" };
+    return formData;
   }
+
+  async componentDidMount() {
+    const api_url = `http://localhost:8080/ingredients`;
+    const response = await fetch(api_url);
+    const data = await response.json();
+    this.setState({ ingredientData: data });
+  }
+
   render() {
     return (
       <Container maxWidth="sm">
@@ -64,38 +85,39 @@ class IngredientList extends Component {
                 maxWidth: "100%",
               }}
             >
-              <TextField
-                fullWidth
-                label="ingredients"
-                id="fullWidth"
-                type="text"
-                name="ingredient"
-                onChange={this.handleChange}
-                value={this.state.value}
-              />
-
-              <Button variant="contained" type="submit" value="submit">
-                Add
-              </Button>
+              <form onSubmit={this.handleSubmit}>
+                <label>
+                  Ingredient Name:
+                  <input
+                    type="text"
+                    value={this.state.value}
+                    onChange={this.handleChange}
+                  />
+                </label>
+                <input type="submit" value="Submit" />
+              </form>
             </Box>
             <Demo>
               <List>
-                {generate(
-                  <ListItem
-                    secondaryAction={
-                      <IconButton edge="end" aria-label="delete">
-                        <DeleteIcon />
-                      </IconButton>
-                    }
-                  >
-                    <ListItemAvatar>
-                      <Avatar>
-                        <NoteAltIcon />
-                      </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText primary="Single-line item" />
-                  </ListItem>
-                )}
+                {/* {Object.keys(this.state.ingredientData).map((item, index) => ( */}
+                <ListItem
+                  // key={`${index}`}
+                  secondaryAction={
+                    <IconButton edge="end" aria-label="delete">
+                      <DeleteIcon />
+                    </IconButton>
+                  }
+                >
+                  <ListItemAvatar>
+                    <Avatar>
+                      <NoteAltIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                  // {...this.state.ingredientData[item].ingridient_name}
+                  />
+                </ListItem>
+                {/* ))} */}
               </List>
             </Demo>
           </Grid>
