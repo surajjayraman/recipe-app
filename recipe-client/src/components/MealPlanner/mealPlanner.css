@@ -1,3 +1,13 @@
 .mealPlanner-container {
-  padding-left: 10em;
+  margin-left: 100px !important;
+}
+
+.mealPlanner-h1 {
+  margin-left: 9em;
+  margin-top: 1em;
+}
+.tab {
+  margin-top: 2.5em;
+  margin-bottom: 1em;
+  margin-left: 7.5em;
 }

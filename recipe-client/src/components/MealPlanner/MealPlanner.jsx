@@ -5,7 +5,7 @@ import {
   useFetchDinnerData,
 } from "../../helpers/ApiHelpers";
 
-import "../Card/displayCard.css";
+import "./mealPlanner.css";
 
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
@@ -62,10 +62,11 @@ function MealPlanner() {
 
   return (
     <div class="mealPlanner-container">
-      <h1> Create your Meal Plan</h1>
+      <h1 class="mealPlanner-h1"> Create Your Meal Plan</h1>
       <Box sx={{ width: "100%" }}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs
+            className="tab"
             value={value}
             onChange={handleChange}
             aria-label="basic tabs example"

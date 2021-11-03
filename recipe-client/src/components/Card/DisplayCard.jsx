@@ -1,9 +1,8 @@
 import React from "react";
-// import { Card, ListGroupItem, ListGroup } from "react-bootstrap";
-// import addRecipe from "../MainContainer/MainContainer";
 import "./displayCard.css";
 import axios from "axios";
 
+import Link from "@mui/material/Link";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -66,17 +65,25 @@ const DisplayCard = (props) => {
   return (
     <div className="card-container">
       {Object.keys(data).map((item, index) => (
-        <Card sx={{ width: 300 }} key={`${index}`}>
+        <Card className="displaycard-card" sx={{ width: 250 }} key={`${index}`}>
           <CardMedia
             component="img"
             alt="Meal Image"
-            height="140"
+            height="180"
             image={`${data[item].recipe.image}`}
           />
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              {`${data[item].recipe.label}`}
+            <Typography
+              className="typography-h1"
+              gutterBottom
+              variant="h5"
+              component="div"
+            >
+              <a src={`${data[item].recipe.url}`}>
+                {`${data[item].recipe.label}`}
+              </a>
             </Typography>
+
             <Typography variant="body2" color="text.secondary">
               Calories: {`${data[item].recipe.calories}`}
               {/* {Object.keys(data[item].recipe.ingredients).map((itm, idx) => ( */}
@@ -94,10 +101,15 @@ const DisplayCard = (props) => {
               Cuisine Type: {`${data[item].recipe.cuisineType[0]}`}
             </Typography>
           </CardContent>
+
           <CardActions>
-            <Button size="small" onClick={`${data[item].recipe.url}`}>
-              Recipe
-            </Button>
+            <Link
+              className="recipe-link"
+              href={`${data[item].recipe.url}`}
+              underline="hover"
+            >
+              RECIPE
+            </Link>
             <Button size="small" onClick={() => addRecipe(data[item])}>
               Add to My Recipe
             </Button>

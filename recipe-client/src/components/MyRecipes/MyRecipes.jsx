@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useFetchMyRecipe } from "../../helpers/ApiHelpers";
-import "../Card/displayCard.css";
+import "./myRecipes.css";
 
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -8,7 +8,6 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import Link from "@mui/material/Link";
 
 function MyRecipes() {
   const { data, error, loading, refreshData } = useFetchMyRecipe();
@@ -30,10 +29,10 @@ function MyRecipes() {
 
   return (
     <div>
-      <h1> My Recipes</h1>
+      <h1 className="myRecipes-h1"> My Recipes</h1>
 
       <br />
-      <div className="card-container">
+      <div className="myRecipes-card-container">
         {Object.keys(data).map((item, index) => (
           <Card sx={{ width: 300 }} key={`${index}`}>
             <CardMedia
