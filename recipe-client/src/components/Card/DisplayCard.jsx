@@ -1,7 +1,5 @@
 import React from "react";
 import "./displayCard.css";
-import axios from "axios";
-
 import Link from "@mui/material/Link";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -85,7 +83,7 @@ const DisplayCard = (props) => {
             </Typography>
 
             <Typography variant="body2" color="text.secondary">
-              Calories: {`${data[item].recipe.calories}`}
+              Calories: {`${Math.floor(data[item].recipe.calories)}`}
               {/* {Object.keys(data[item].recipe.ingredients).map((itm, idx) => ( */}
               {/* <Typography
                   variant="body2"
@@ -106,7 +104,7 @@ const DisplayCard = (props) => {
             <Link
               className="recipe-link"
               href={`${data[item].recipe.url}`}
-              underline="hover"
+              underline="none"
             >
               RECIPE
             </Link>
@@ -116,32 +114,6 @@ const DisplayCard = (props) => {
           </CardActions>
         </Card>
       ))}
-
-      {/* {Object.keys(data).map((item, index) => (
-        <Card key={`${index}`} style={{ width: "18rem" }}>
-          <Card.Img variant="top" src={`${data[item].recipe.image}`} />
-          <Card.Body>
-            <Card.Title>{`${data[item].recipe.label}`}</Card.Title>
-          </Card.Body>
-          <ListGroup className="list-group-flush">
-            <ListGroupItem>
-              Cuisine Type: {`${data[item].recipe.cuisineType}`}
-            </ListGroupItem>
-            <ListGroupItem>
-              {" "}
-              <Card.Link href="{`${data[item].recipe.ingredients}`}">
-                Ingridient List
-              </Card.Link>{" "}
-            </ListGroupItem>
-          </ListGroup>
-          <Card.Body>
-            <Card.Link
-              href={`${data[item].recipe.url}`}
-            >{`${data[item].recipe.source}`}</Card.Link>
-            <button onClick={addRecipe}>Add Recipe</button>
-          </Card.Body>
-        </Card>
-      ))} */}
     </div>
   );
 };

@@ -24,3 +24,26 @@
   gap: 10px !important;
   /* width: 1200px ; */
 }
+.mainContainer-card {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9em;
+  width: 850px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  border: 1px solid grey;
+  padding: 25px;
+  margin-left: 6em;
+  cursor: pointer;
+  -moz-osx-font-smoothing: greyscale;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  transition: transform 0.25 ease-out;
+}
+.for-you {
+  margin-left: 5em;
+  margin-bottom: 1em;
+}
+.roundedImage {
+  border-radius: 50%;
+}

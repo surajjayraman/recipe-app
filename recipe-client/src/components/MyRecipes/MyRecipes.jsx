@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useFetchMyRecipe } from "../../helpers/ApiHelpers";
 import "./myRecipes.css";
 
@@ -7,14 +7,12 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
+import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 
 function MyRecipes() {
   const { data, error, loading, refreshData } = useFetchMyRecipe();
-  const [buttonPopup, setButtonPopup] = useState(false);
-
   function removeRecipe(deleteData) {
-    console.log(">>>>>", deleteData.recipe_id);
     fetch(`http://localhost:8080/recipe/${deleteData.recipe_id}`, {
       method: "DELETE",
     })
@@ -47,7 +45,7 @@ function MyRecipes() {
               </Typography>
               <Typography variant="body2" color="text.secondary"></Typography>
               <Typography variant="body2" color="text.secondary">
-                Calories: {`${data[item].calories}`}
+                Calories: {`${Math.floor(data[item].calories)}`}
               </Typography>
 
               <Typography variant="body2" color="text.secondary">
@@ -59,7 +57,13 @@ function MyRecipes() {
             </CardContent>
 
             <CardActions>
-              <Button size="small">Recipe</Button>
+              <Link
+                className="recipe-link"
+                underline="none"
+                href={`${data[item].preparation}`}
+              >
+                RECIPE
+              </Link>
               <Button size="small" onClick={() => removeRecipe(data[item])}>
                 Remove
               </Button>
