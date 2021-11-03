@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "react-bootstrap";
 import "./search-box.css";
 
 export const Search = ({ placeholder, handleChange }) => (
@@ -10,8 +9,5 @@ export const Search = ({ placeholder, handleChange }) => (
       placeholder={placeholder}
       onChange={handleChange}
     />
-    <Button className="search-button" variant="primary" type="submit">
-      Search
-    </Button>
   </div>
 );
