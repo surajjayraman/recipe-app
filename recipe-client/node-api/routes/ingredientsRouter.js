@@ -24,15 +24,18 @@ const getIngredients = () => {
 };
 const addIngredients = (body) => {
   return new Promise(function (resolve, reject) {
-    const { user_id, ingredient_id, ingridient_name } = body;
+    const { user_id, ingridient_name } = body;
+
+    console.log("from the router>>>>>>");
     pool.query(
-      "INSERT INTO ingredients (user_id, ingredient_id, ingridient_name) VALUES ($1, $2, $3) RETURNING *",
-      [user_id],
+      "INSERT INTO ingredients (user_id, ingridient_name) VALUES ($1, $2) RETURNING *",
+      [user_id, ingridient_name],
+
       (error, results) => {
         if (error) {
           reject(error);
         }
-        resolve(`A new ingredient has been added: ${results.rows[0]}`);
+        resolve(`A new ingredient has been added`);
       }
     );
   });

@@ -8,9 +8,7 @@ function RightSide() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
-  useEffect(() => {
-    if (localStorage.getItem("user-info")) history.push("/home");
-  }, []);
+
   async function login() {
     let item = { email, password };
     let result = await fetch("http://localhost:8080/login", {

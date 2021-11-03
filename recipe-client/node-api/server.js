@@ -63,12 +63,14 @@ app.get("/recipe", cors(), (req, res) => {
 });
 
 app.post("/recipe", cors(), (req, res) => {
+  console.log("from the server>>>>>>", req.body);
   recipeRouter
     .addRecipes(req.body)
     .then((response) => {
       res.status(200).send(response);
     })
     .catch((error) => {
+      console.log("error from the server>>>>>>", error);
       res.status(500).send(error);
     });
 });
@@ -83,26 +85,26 @@ app.get("/recipe/:id", cors(), (req, res) => {
     });
 });
 
-app.post("/recipe/:id", cors(), (req, res) => {
-  recipeRouter
-    .addRecipes(req.params.id)
-    .then((response) => {
-      res.status(200).send(response);
-    })
-    .catch((error) => {
-      res.status(500).send(error);
-    });
-});
+// app.post("/recipe/:id", cors(), (req, res) => {
+//   recipeRouter
+//     .addRecipes(req.params.id)
+//     .then((response) => {
+//       res.status(200).send(response);
+//     })
+//     .catch((error) => {
+//       res.status(500).send(error);
+//     });
+// });
 
 app.delete("/recipe/:id", cors(), (req, res) => {
-  console.log("from server.js>>>>>> trying");
   recipeRouter
     .deleteRecipe(req.params.id)
     .then((response) => {
+      console.log("from delete post ++++++++++", response);
       res.status(200).send(response);
     })
     .catch((error) => {
-      console.log("from server.js>>>>>> error");
+      console.log("from server.js>>>>>> error", error);
       res.status(500).send(error);
     });
 });
@@ -122,6 +124,7 @@ app.post("/ingredients", cors(), (req, res) => {
   ingredientsRouter
     .addIngredients(req.body)
     .then((response) => {
+      console.log("if it works>>>>");
       res.status(200).send(response);
     })
     .catch((error) => {
