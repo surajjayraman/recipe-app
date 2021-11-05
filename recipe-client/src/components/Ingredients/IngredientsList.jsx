@@ -34,9 +34,7 @@ class IngredientList extends Component {
 
   handleSubmit(event) {
     const formData = this.state.value;
-
     const user_info = JSON.parse(localStorage.getItem("user-info"));
-
     const user_id = user_info[0].id;
     const ingridient_name = formData;
 
@@ -69,7 +67,6 @@ class IngredientList extends Component {
     const response = await fetch(api_url);
     const data = await response.json();
     this.setState({ ingredientData: data });
-    console.log(">>>>>>", this.state.ingredientData);
   }
 
   render() {
