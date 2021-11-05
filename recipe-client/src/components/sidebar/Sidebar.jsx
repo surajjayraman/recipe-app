@@ -27,8 +27,7 @@ function Sidebar() {
           <Nav.Link eventKey="link-1">
             <Link to="/myRecipes">My Recipes</Link>
           </Nav.Link>
-          <Nav.Link eventKey="link-2">Ingridients List</Nav.Link>
-          <Nav.Link eventKey="link-2">Browse</Nav.Link>
+          {/* <Nav.Link eventKey="link-2">Ingridients List</Nav.Link> */}
         </Nav>
         <Switch>
           <Route path="/main" component={MainContainer} />

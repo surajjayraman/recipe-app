@@ -1,10 +1,5 @@
 import React from "react";
 
-import Box from "@mui/material/Box";
-import CssBaseline from "@mui/material/CssBaseline";
-
-import ImageList from "@mui/material/ImageList";
-import ImageListItem from "@mui/material/ImageListItem";
 import Link from "@mui/material/Link";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -12,7 +7,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import ListSubheader from "@mui/material/ListSubheader";
+import American from "../../images/American.jpeg";
 
 import "./mainContainer.css";
 import { useFetchRecipe } from "../../helpers/ApiHelpers";
@@ -29,22 +24,14 @@ import { withRouter } from "react-router-dom";
 
 const drawerWidth = 240;
 
-function MainContainer(props) {
+function MainContainer() {
   const { data, error, loading } = useFetchRecipe();
-  console.log(data);
+
   if (loading) return <p>Still Loading!</p>;
   if (error) throw error;
 
   return (
     <div>
-      <img
-        className="roundedImage"
-        component="img"
-        alt="Meal Image"
-        height="180"
-        image=""
-      />
-
       <h5 className="for-you">For You</h5>
       <div className="mainContainer-card">
         {data.hits.map((item, index) => (

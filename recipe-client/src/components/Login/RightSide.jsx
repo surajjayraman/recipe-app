@@ -27,7 +27,7 @@ function RightSide() {
   return (
     <div>
       <Form className="login-form" onSubmit={(e) => e.preventDefault()}>
-        <img src={logo} className="logo" />
+        <img src={logo} className="login-logo" />
         <h2>Join, and Eat well</h2>
 
         <Form.Group className="mb-3" controlId="formBasicEmail">

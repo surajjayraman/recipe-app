@@ -34,9 +34,7 @@ class IngredientList extends Component {
 
   handleSubmit(event) {
     const formData = this.state.value;
-
     const user_info = JSON.parse(localStorage.getItem("user-info"));
-
     const user_id = user_info[0].id;
     const ingridient_name = formData;
 
@@ -99,25 +97,24 @@ class IngredientList extends Component {
             </Box>
             <Demo>
               <List>
-                {/* {Object.keys(this.state.ingredientData).map((item, index) => ( */}
-                <ListItem
-                  // key={`${index}`}
-                  secondaryAction={
-                    <IconButton edge="end" aria-label="delete">
-                      <DeleteIcon />
-                    </IconButton>
-                  }
-                >
-                  <ListItemAvatar>
-                    <Avatar>
-                      <NoteAltIcon />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                  // {...this.state.ingredientData[item].ingridient_name}
-                  />
-                </ListItem>
-                {/* ))} */}
+                {this.state.ingredientData &&
+                  this.state.ingredientData.map((item, index) => (
+                    <ListItem
+                      key={`${index}`}
+                      secondaryAction={
+                        <IconButton edge="end" aria-label="delete">
+                          <DeleteIcon />
+                        </IconButton>
+                      }
+                    >
+                      <ListItemAvatar>
+                        <Avatar>
+                          <NoteAltIcon />
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText primary={item.ingridient_name} />
+                    </ListItem>
+                  ))}
               </List>
             </Demo>
           </Grid>
